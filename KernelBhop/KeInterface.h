@@ -19,11 +19,11 @@ https://www.youtube.com/watch?v=sJdBtPosWQs */
 #define IO_GET_MODULE_REQUEST CTL_CODE(FILE_DEVICE_UNKNOWN, 0x0704 /* Our Custom Code */, METHOD_BUFFERED, FILE_SPECIAL_ACCESS)
 
 // Offset to force jump action
-#define FORCE_JUMP 0x04F5FD5C
+#define FORCE_JUMP 0x51869A8
 // offset to local player
-#define LOCAL_PLAYER 0x00AA66D4
+#define LOCAL_PLAYER 0xCD2764
 
-#define FFLAGS 0x00000100
+#define FFLAGS 0x104
 
 
 typedef struct _KERNEL_READ_REQUEST
@@ -62,8 +62,7 @@ public:
 	}
 
 	template <typename type>
-	type ReadVirtualMemory(ULONG ProcessId, ULONG ReadAddress,
-		SIZE_T Size)
+	type ReadVirtualMemory(ULONG ProcessId, ULONG ReadAddress)
 	{
 		if (hDriver == INVALID_HANDLE_VALUE)
 			return (type)false;
@@ -73,7 +72,7 @@ public:
 
 		ReadRequest.ProcessId = ProcessId;
 		ReadRequest.Address = ReadAddress;
-		ReadRequest.Size = Size;
+		ReadRequest.Size = sizeof(type);
 
 		// send code to our driver with the arguments
 		if (DeviceIoControl(hDriver, IO_READ_REQUEST, &ReadRequest,
@@ -83,8 +82,9 @@ public:
 			return (type)false;
 	}
 
+	template <typename type>
 	bool WriteVirtualMemory(ULONG ProcessId, ULONG WriteAddress,
-		ULONG WriteValue, SIZE_T WriteSize)
+		ULONG WriteValue)
 	{
 		if (hDriver == INVALID_HANDLE_VALUE)
 			return false;
@@ -94,7 +94,7 @@ public:
 		WriteRequest.ProcessId = ProcessId;
 		WriteRequest.Address = WriteAddress;
 		WriteRequest.Value = WriteValue;
-		WriteRequest.Size = WriteSize;
+		WriteRequest.Size = sizeof(type);
 
 		if (DeviceIoControl(hDriver, IO_WRITE_REQUEST, &WriteRequest, sizeof(WriteRequest),
 			0, 0, &Bytes, NULL))

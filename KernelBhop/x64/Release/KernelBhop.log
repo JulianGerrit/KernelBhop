@@ -1,15 +1,16 @@
-﻿  KernelBhop.cpp
-d:\projects\kernelbhop\kernelbhop\KeInterface.h(93): warning C4244: '=': conversion from 'SIZE_T' to 'ULONG', possible loss of data
-d:\projects\kernelbhop\kernelbhop\KeInterface.h(72): warning C4244: '=': conversion from 'SIZE_T' to 'ULONG', possible loss of data
-  KernelBhop.cpp(17): note: see reference to function template instantiation 'type KeInterface::ReadVirtualMemory<DWORD>(ULONG,ULONG,SIZE_T)' being compiled
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(402,5): warning MSB8038: Spectre mitigation is enabled but Spectre mitigated libraries are not found.  Verify that the Visual Studio Workload includes the Spectre mitigated libraries.  See https://aka.ms/Ofhn4c for more information.
+  KernelBhop.cpp
+c:\users\julian\desktop\kernelbhop\kernelbhop\kernelbhop.cpp(43): warning C4554: '&': check operator precedence for possible error; use parentheses to clarify precedence
+c:\users\julian\desktop\kernelbhop\kernelbhop\keinterface.h(70): warning C4101: 'Return': unreferenced local variable
+  c:\users\julian\desktop\kernelbhop\kernelbhop\kernelbhop.cpp(21): note: see reference to function template instantiation 'type KeInterface::ReadVirtualMemory<DWORD>(ULONG,ULONG)' being compiled
           with
           [
               type=DWORD
           ]
-d:\projects\kernelbhop\kernelbhop\KeInterface.h(67): warning C4101: 'Return': unreferenced local variable
-d:\projects\kernelbhop\kernelbhop\KeInterface.h(67): warning C4101: 'Bytes': unreferenced local variable
+c:\users\julian\desktop\kernelbhop\kernelbhop\keinterface.h(70): warning C4101: 'Bytes': unreferenced local variable
   Generating code
-  All 19 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  1 of 19 functions ( 5.3%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
-  KernelBhop.vcxproj -> D:\Projects\KernelBhop\x64\Release\KernelBhop.exe
-  KernelBhop.vcxproj -> D:\Projects\KernelBhop\x64\Release\KernelBhop.pdb (Full PDB)
+  KernelBhop.vcxproj -> C:\Users\Julian\Desktop\KernelBhop\x64\Release\KernelBhop.exe

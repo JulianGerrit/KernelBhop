@@ -18,11 +18,11 @@ int main()
 	DWORD ClientAddress = Driver.GetClientModule();
 
 	// Get address of localplayer
-	DWORD LocalPlayer = Driver.ReadVirtualMemory<DWORD>(ProcessId, ClientAddress + LOCAL_PLAYER, sizeof(ULONG));
+	DWORD LocalPlayer = Driver.ReadVirtualMemory<DWORD>(ProcessId, ClientAddress + LOCAL_PLAYER);
 
 	// address of inground
 	DWORD InGround = Driver.ReadVirtualMemory<DWORD>(ProcessId,
-		LocalPlayer + FFLAGS, sizeof(ULONG));
+		LocalPlayer + FFLAGS);
 
 	// check that addresses were found
 
@@ -37,19 +37,20 @@ int main()
 
 	while (true)
 	{
-		// Constantly check if player is in ground
-		DWORD InGround = Driver.ReadVirtualMemory<DWORD>(ProcessId, LocalPlayer + FFLAGS, sizeof(ULONG));
+		// Constant checking so that the cheat doesnt have to be restarted every new game
+		DWORD LocalPlayer = Driver.ReadVirtualMemory<DWORD>(ProcessId, ClientAddress + LOCAL_PLAYER);
+		DWORD InGround = Driver.ReadVirtualMemory<DWORD>(ProcessId, LocalPlayer + FFLAGS);
 		// Check if space is down & player is in ground
 		if ((GetAsyncKeyState(VK_SPACE) & 0x8000) && (InGround & 1 == 1))
 		{
 			// Jump
-			Driver.WriteVirtualMemory(ProcessId, ClientAddress + FORCE_JUMP, 0x5, 8);
-			Sleep(50);
+			Driver.WriteVirtualMemory<int>(ProcessId, ClientAddress + FORCE_JUMP, 0x5);
+			Sleep(30);
 			// Restore
-			Driver.WriteVirtualMemory(ProcessId, ClientAddress + FORCE_JUMP, 0x4, 8);
+			Driver.WriteVirtualMemory<int>(ProcessId, ClientAddress + FORCE_JUMP, 0x4);
 			
 		}
-		Sleep(10);
+		Sleep(1);
 	}
     return 0;
 }
